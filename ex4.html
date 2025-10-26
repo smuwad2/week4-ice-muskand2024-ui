@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 
 <head>
@@ -10,10 +11,10 @@
    <p>Get it done today</p>
 
    <input type="text" id="inputText">
-   <!-- add a button here for adding new item -->
+   <button id="enterBtn" type="button">Enter</button>
 
    <ul>
-      <li>Notebook<!--<button>Delete</button></li>-->
+      <li>Notebook</li>
       <li>Jello</li>
       <li>Spinach</li>
       <li>Rice</li>
@@ -22,9 +23,53 @@
    </ul>
 
    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+         const input = document.getElementById('inputText');
+         const enterBtn = document.getElementById('enterBtn');
+         const list = document.querySelector('ul');
 
-      // add code here
+         function createDeleteButton(li) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = 'Delete';
+            btn.addEventListener('click', () => {
+               li.remove();
+            });
+            return btn;
+         }
 
+         // Attach delete button to existing items
+         Array.from(list.children).forEach(node => {
+            if (node.tagName === 'LI') {
+               node.appendChild(createDeleteButton(node));
+            }
+         });
+
+         function addItem() {
+            const value = input.value.trim();
+            if (!value) {
+               input.value = '';
+               input.focus();
+               return;
+            }
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(value));
+            li.appendChild(createDeleteButton(li));
+            list.appendChild(li);
+            input.value = '';
+            input.focus();
+         }
+
+         enterBtn.addEventListener('click', addItem);
+
+         // also allow pressing Enter key in the input
+         input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+               e.preventDefault();
+               addItem();
+            }
+         });
+      });
    </script>
 
 </body>

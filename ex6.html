@@ -19,6 +19,19 @@
     <script>
         
         // add code here
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.getElementById('select_item');
+            const shopList = document.getElementById('shopList');
+
+            select.addEventListener('change', () => {
+                const idx = select.selectedIndex;
+                if (idx < 0) return;
+                const text = select.options[idx].text;
+                const li = document.createElement('li');
+                li.appendChild(document.createTextNode(text));
+                shopList.appendChild(li);
+            });
+        });
         
         
     </script>

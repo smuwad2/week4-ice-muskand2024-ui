@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Event Handling</title>
+    <title>Event Handling</title>
    
     <style>
 
@@ -15,6 +15,9 @@
         }
 
         /* Add CSS code here */ 
+        .square {
+            border-radius: 0;
+        }
 
     </style>
 </head>
@@ -26,6 +29,15 @@
         
         <script>
            // add code here
+           function mOver(el) {
+               el.classList.add('square');
+               el.classList.remove('circle');
+           }
+
+           function mOut(el) {
+               el.classList.remove('square');
+               el.classList.add('circle');
+           }
         </script>
                 
 </body>
